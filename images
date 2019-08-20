@@ -1,0 +1,15 @@
+--Image keycloak:
+
+docker pull jboss/keycloak
+
+-- expose on localhost
+
+docker run -p 8080:8080 jboss/keycloak
+
+--Create user on an already running container
+
+docker exec <container_id> keycloak/bin/add-user-keycloak.sh -u <username> -p <password>
+
+--then restarting the contrainer
+
+docker restart <container_id>
