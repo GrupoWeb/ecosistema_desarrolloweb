@@ -1,0 +1,1 @@
+rm -rf /home/mistert/Escritorio/Project-Dw2019/keycloak/docker_images/mysql/*

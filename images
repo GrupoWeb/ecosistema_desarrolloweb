@@ -4,7 +4,8 @@ docker pull jboss/keycloak
 
 -- expose on localhost
 
-docker run --net projectdw2019_mongo_net -p 8080:8080 -e DB_ADDR=192.168.1.2 -e DB_PORT1=3306 -e DB_DATABASE=keycloak -e DB_USER=root -e DB_PASSWORD=secret jboss/keycloak
+docker run --net projectdw2019_mongo_net  -p 8080:8080 -e DB_ADDR=192.168.1.2 -e DB_PORT=3306 -e DB_DATABASE=keycloak -e DB_USER=root -e DB_PASSWORD=secret -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=123 -v /tmp:/tmp jboss/keycloak
+
 
 --Create user on an already running container
 
