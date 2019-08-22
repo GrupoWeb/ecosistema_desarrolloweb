@@ -5,3 +5,5 @@ docker exec -it mysql57 mysql -uroot -p
 para conectarse romoto:
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'secret' WITH GRANT OPTION
+
+
