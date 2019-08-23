@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  mysql:
+      image: mysql:5.7
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: 'secret'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: 'secret'
+      ports:
+      - '3306:3306'
+      expose:
+      - '3306'
+      networks:
+      - mysql_network
+      volumes:
+        - /home/mistert/Escritorio/Project-Dw2019/keycloak/docker_images/mysql:/var/lib/mysql 
+      container_name: mysql
+networks:
+  mysql_network:
+      external:
+            name: redes
