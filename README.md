@@ -51,4 +51,7 @@ $ docker pull node
 ****https://github.com/robsontenorio/laravel-keycloak-guard                             *
 
 ## Container Redis
+
+--También necesitará una instancia de redis en ejecución (en el puerto 6379) para habilitar el limitador de solicitud de la puerta de enlace. El wat más fácil es girar una instancia de redis en el contenedor docker:
+
  $ docker run --name some-redis -p --net projectdw2019_mongo_net 6379:6379 -d redis
