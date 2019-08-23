@@ -1,8 +1,12 @@
 # ecosistema_desarrolloweb
 
--Exec Keycloak and  Postgres
+# Create Network Name
 
-$ docker-compose -f compose-postgres.yaml up
+$ docker network create --driver=bridge --subnet=150.168.0.0/16 projectdw2019_mongo_net
+
+# Exec Keycloak and  Postgres
+
+$ docker-compose -f compose-keycloak.yaml up
 
 Entrar a Postgres
 
@@ -34,3 +38,17 @@ $ docker-compose -f compose-mongo.yaml up
 -- node
 
 $ docker pull node
+
+
+*****************************************************************************************
+*****************************************************************************************
+
+###Configuration Guide                                                                  *
+                                                                                        *
+****https://scalac.io/user-authentication-keycloak-1/                                   *
+                                                                                        *
+## Keycloak in Laravel                                                                  *
+****https://github.com/robsontenorio/laravel-keycloak-guard                             *
+
+## Container Redis
+ $ docker run --name some-redis -p --net projectdw2019_mongo_net 6379:6379 -d redis

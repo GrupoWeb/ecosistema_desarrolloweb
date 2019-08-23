@@ -1,14 +1,14 @@
 version: '3'
 
 volumes:
-  keycloak_data:
+  postgres_data:
       driver: local
 
 services:
   postgres:
       image: postgres
       volumes:
-        - ./keycloak_data:/var/lib/postgresql/data
+        - /home/mistert/Escritorio/Project-Dw2019/keycloak/postgres_data:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
