@@ -99,6 +99,8 @@ $ docker run -d --net projectdw2019_mongo_net --ip 151.168.1.160 --name gateway 
 
 ## configurar keycloak 2
 ******https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2
+******https://github.com/spring-projects/spring-security/tree/master/samples/boot/oauth2login
+******https://github.com/hantsy/keycloak-springsecurity5-sample/blob/master/src/main/resources/application.yml
 
 ## Container Redis
 ```
