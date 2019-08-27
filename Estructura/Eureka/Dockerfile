@@ -12,10 +12,10 @@ LABEL Description="Eureka Server" Version="0.0.1"
 ARG VERSION=0.0.1
 
 # mount the temp volume
-# VOLUME /tmp
+VOLUME eureka_data
 
 # Add the service as app.jar
-ADD build/eureka-server-${VERSION}-SNAPSHOT.jar app.jar
+ADD build/discovery-1.0.0-SNAPSHOT.jar app.jar
 
 # touch the archive for timestamp
 RUN sh -c 'touch /app.jar'

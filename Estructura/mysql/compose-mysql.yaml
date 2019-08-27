@@ -1,5 +1,9 @@
 version: '3.3'
 
+volumes:
+  mysql_data:
+      driver: local
+
 services:
   mysql:
       image: mysql:5.7
@@ -15,9 +19,9 @@ services:
       networks:
       - mysql_network
       volumes:
-        - /home/mistert/Escritorio/Project-Dw2019/keycloak/docker_images/mysql:/var/lib/mysql 
+        - mysql_data:/var/lib/mysql 
       container_name: mysql
 networks:
   mysql_network:
       external:
-            name: redes
+            name: projectdw2019_mongo_net
