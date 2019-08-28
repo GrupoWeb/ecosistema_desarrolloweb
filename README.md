@@ -105,3 +105,8 @@ $ docker run -d --net projectdw2019_mongo_net --ip 151.168.1.160 --name gateway 
 ## Container Redis
 ```
 --También necesitará una instancia de redis en ejecución (en el puerto 6379) para habilitar el limitador de solicitud de la puerta de enlace. El wat más fácil es girar una instancia de redis en el contenedor docker:
+
+
+
+docker-compose stop // para detener la pila
+docker-compose -f docker-compose.yaml rm -f
