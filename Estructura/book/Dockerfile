@@ -9,8 +9,8 @@ LABEL Description="Book" Version="0.0.1"
 
 VOLUME data
 
-ADD . /build
+ADD build/bookstore-1.0.0-SNAPSHOT.jar app.jar
 
-# RUN sh -c 'touch /app.jar'
+RUN sh -c 'touch /app.jar'
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/build/bookstore-1.0.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
