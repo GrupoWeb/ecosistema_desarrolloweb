@@ -110,3 +110,5 @@ $ docker run -d --net projectdw2019_mongo_net --ip 151.168.1.160 --name gateway 
 
 docker-compose stop // para detener la pila
 docker-compose -f docker-compose.yaml rm -f
+
+https://www.npmjs.com/package/eureka-js-client
