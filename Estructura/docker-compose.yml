@@ -8,6 +8,10 @@ volumes:
       driver: local
   node_umg:
       driver: local
+  sessions:
+    driver: local
+  data:
+    driver: local
 
 services:
   redis:
@@ -50,7 +54,7 @@ services:
     ports:
      - 8181:80
     volumes:
-     - sessions
+     - ./sessions
     networks:
         redes_data:
             ipv4_address: 172.20.0.4
@@ -134,7 +138,9 @@ services:
   web:
     container_name: web
     image: docker-node-express-mongoapp
-    build: ./node_umg
+    build:
+        context: ./node_umg
+        dockerfile: Dockerfile
     command: node src/index.js
     ports:
       - "3000:3000"
@@ -152,6 +158,8 @@ services:
     image: "mongo"
     ports:
       - "27017:27017"
+    volumes: 
+      - ./mongo/data:/data/db
     networks:
         redes_data:
             ipv4_address: 172.20.0.9

@@ -27,15 +27,15 @@ const eureka = new Eureka({
       servicePath: '/eureka/apps/'
     }
   });
-  // eureka.logger.level('debug');
-  // eureka.start(function(error){
-  //   console.log(error || 'complete');
-  // });
+  eureka.logger.level('debug');
+  eureka.start(function(error){
+    console.log(error || 'complete');
+  });
 //-------------------------------------------------------
 
 // Initilizations
 const app = express();
-// require('./database');
+require('./database');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -50,7 +50,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Router
 app.use(require('./router/controlador'))
-app.use(require('./models/votos'))
 
 // Static Files
 

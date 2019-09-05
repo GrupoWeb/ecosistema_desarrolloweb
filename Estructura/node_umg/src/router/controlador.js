@@ -2,6 +2,10 @@ const router = require('express').Router();
 
 const voto = require('../models/votos');
 
+router.get('/', (req, res) => {
+    res.send('ok');
+})
+
 router.post('/add', async (req, res) => {
     const { title, description } = req.query;
     const errors = [];
