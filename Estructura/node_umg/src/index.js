@@ -27,10 +27,10 @@ const eureka = new Eureka({
       servicePath: '/eureka/apps/'
     }
   });
-  eureka.logger.level('debug');
-  eureka.start(function(error){
-    console.log(error || 'complete');
-  });
+  // eureka.logger.level('debug');
+  // eureka.start(function(error){
+  //   console.log(error || 'complete');
+  // });
 //-------------------------------------------------------
 
 // Initilizations
