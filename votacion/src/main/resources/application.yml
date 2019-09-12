@@ -1,0 +1,42 @@
+server:
+  port: 8889
+
+spring:
+  application:
+    name: VOTACIONES
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: 12345678
+    testWhileIdle: true
+    validation-query: SELECT 1 FROM dual
+    max-wait: 20000
+    max-active: 3000
+    test-on-borrow: true
+    platform: mysql
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
+      maximum-pool-size: 400
+      idle-timeout: 50000
+      max-lifetime: 2400000
+      connection-timeout: 60000
+      pool-name: mysqlHikariCP
+      minimum-idle: 10
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      accept-single-value-as-array: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/SpringBootKeycloak
+
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
