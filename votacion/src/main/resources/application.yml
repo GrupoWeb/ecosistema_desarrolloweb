@@ -5,7 +5,7 @@ spring:
   application:
     name: VOTACIONES
   datasource:
-    url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
+    url: jdbc:mysql://localhost:3306/censo?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
     username: root
     password: 12345678
     testWhileIdle: true
@@ -15,7 +15,7 @@ spring:
     test-on-borrow: true
     platform: mysql
     hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
+      jdbc-url: jdbc:mysql://localhost:3306/censo?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
       maximum-pool-size: 400
       idle-timeout: 50000
       max-lifetime: 2400000
