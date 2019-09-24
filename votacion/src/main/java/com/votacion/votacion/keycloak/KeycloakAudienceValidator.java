@@ -21,7 +21,7 @@ class KeycloakAudienceValidator implements OAuth2TokenValidator<Jwt> {
 
 
         // login-app es el nombre del cliente keycloak cambiar
-        if (!jwt.getAudience().contains("login-app")) {
+        if (!jwt.getAudience().contains("dev-umg")) {
             return OAuth2TokenValidatorResult.failure(error);
         }
 

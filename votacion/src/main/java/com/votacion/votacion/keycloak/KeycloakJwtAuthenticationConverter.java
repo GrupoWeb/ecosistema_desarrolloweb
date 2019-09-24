@@ -34,7 +34,7 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         // login-app se tiene que cambiar por el cliente en keycloak
         Collection<GrantedAuthority> authorities = mapKeycloakRolesToAuthorities( //
                 getRealmRolesFrom(jwt), //
-                getClientRolesFrom(jwt, "login-app") //
+                getClientRolesFrom(jwt, "dev-umg") //
         );
 
         JwtAuthenticationToken jwtAuth = (JwtAuthenticationToken) jwtAuthenticationConverter.convert(jwt);

@@ -8,10 +8,10 @@ spring:
     url: jdbc:mysql://localhost:3306/censo?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
     username: root
     password: 12345678
-    testWhileIdle: true
-    validation-query: SELECT 1 FROM dual
+    test-while-idle: true
+    validation-query: SELECT 1 
     max-wait: 20000
-    max-active: 3000
+    max-active: 300
     test-on-borrow: true
     platform: mysql
     hikari:
@@ -20,8 +20,8 @@ spring:
       idle-timeout: 50000
       max-lifetime: 2400000
       connection-timeout: 60000
-      pool-name: mysqlHikariCP
-      minimum-idle: 10
+      pool-name: MyPoll
+      
   jackson:
     serialization:
       write-dates-as-timestamps: false
@@ -31,12 +31,12 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/auth/realms/SpringBootKeycloak
+          issuer-uri: http://172.20.0.8:8080/auth/realms/dev
 
 
 logging:
   level:
     root: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2: DEBUG
+    # org.springframework.web: info
+    # org.springframework.security: info
+    # org.springframework.security.oauth2: info
