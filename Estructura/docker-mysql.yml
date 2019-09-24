@@ -1,0 +1,74 @@
+# Integración de Proyecto Desarrollo Web
+version: '3.2'
+
+volumes:
+  keycloak_data:
+      driver: local
+  mysql_data:
+      driver: local
+  node_umg:
+      driver: local
+  sessions:
+    driver: local
+  data:
+    driver: local
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql57
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'secret'
+      MYSQL_DATABASE: 'bookstore'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'secret'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql_data:/var/lib/mysql 
+    networks:
+        redes_data:
+            ipv4_address: 172.20.0.3
+             
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8181:80
+    volumes:
+     - ./sessions
+    networks:
+        redes_data:
+            ipv4_address: 172.20.0.4
+
+  web:
+    container_name: web
+    image: docker-node-express-mongoapp
+    build:
+        context: ./node_umg
+        dockerfile: Dockerfile
+    command: node src/index.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node_umg:/usr/src/app # donde tengo /node_umg es mi carpeta local donde esta mi proyecto, cambialo por  la tuya
+      - /usr/src/app/node_modules
+    depends_on:
+      - "db"
+    networks:
+      redes_data:
+          ipv4_address: 172.20.0.12
+     
+networks:
+  redes_data:
+      external:
+            name: redes
