@@ -22,11 +22,12 @@ import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private final KeycloakJwtAuthenticationConverter keycloakJwtAuthenticationConverter;
 
+ 
 
 
     @Override

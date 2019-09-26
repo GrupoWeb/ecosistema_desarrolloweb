@@ -15,11 +15,13 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 @Configuration
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, proxyTargetClass = true)
-class SecurityConfig extends GlobalMethodSecurityConfiguration {
+public class SecurityConfig extends GlobalMethodSecurityConfiguration {
 
     private final ApplicationContext applicationContext;
 
-    private final PermissionEvaluator permissionEvaluator;
+    private final PermissionEvaluator permissionEvaluator;  
+
+   
 
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {

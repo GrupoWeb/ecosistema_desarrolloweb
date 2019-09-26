@@ -10,6 +10,7 @@ spring:
     url: jdbc:mysql://172.20.0.3:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
     # url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
     username: root
+    # password: 12345678
     password: secret
     test-while-idle: true
     validation-query: SELECT 1
@@ -48,13 +49,17 @@ eureka:
     preferIpAddress: true
 
 
+# SET GLOBAL max_connections = 25000;
+# SHOW VARIABLES LIKE "max_connections";
+
+
 
 
 logging:
   level:
     # root: DEBUG
     # org.springframework.web: DEBUG
-    # org.springframework.security: DEBUG
+    org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
 #    org.springframework.cloud.gateway: DEBUG
 
