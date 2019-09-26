@@ -6,64 +6,56 @@ volumes:
       driver: local
   mysql_data:
       driver: local
-  node_umg:
-      driver: local
-  sessions:
-    driver: local
-  data:
-    driver: local
 
 services:
-  # redis:
-  #   container_name: some-redis
-  #   image: redis
-  #   ports: 
-  #     - "6379:6379"
+  redis:
+    container_name: some-redis
+    image: redis
+    ports: 
+      - "6379:6379"
+    networks:
+        redes_data:
+            ipv4_address: 172.20.0.2
+
+  # db:
+  #   image: mysql:5.7
+  #   container_name: mysql57
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 'secret'
+  #     MYSQL_USER: 'root'
+  #     MYSQL_PASSWORD: 'secret'
+  #   ports:
+  #     - '3306:3306'
+  #   expose:
+  #     - '3306'
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql 
   #   networks:
   #       redes_data:
-  #           ipv4_address: 172.20.0.2
-
-  db:
-    image: mysql:5.7
-    container_name: mysql57
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: 'secret'
-      MYSQL_DATABASE: 'bookstore'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'secret'
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - mysql_data:/var/lib/mysql 
-    networks:
-        redes_data:
-            ipv4_address: 172.20.0.3
+  #           ipv4_address: 172.20.0.3
              
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    depends_on:
-      - db
-    container_name: phpmyadmin
-    environment:
-     - PMA_ARBITRARY=1
-    restart: always
-    ports:
-     - 8181:80
-    volumes:
-     - ./sessions
-    networks:
-        redes_data:
-            ipv4_address: 172.20.0.4
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   depends_on:
+  #     - db
+  #   container_name: phpmyadmin
+  #   environment:
+  #    - PMA_ARBITRARY=1
+  #   restart: always
+  #   ports:
+  #    - 8181:80
+  #   volumes:
+  #    - sessions
+  #   networks:
+  #       redes_data:
+  #           ipv4_address: 172.20.0.4
 
   eureka:
     container_name: eureka
     image: eureka
     privileged: true
-    restart: always
     build:
         context: ./Eureka
         dockerfile: Dockerfile
@@ -74,22 +66,20 @@ services:
             ipv4_address: 172.20.0.5
     
 
-  # gateway:
-  #   container_name: gateway
-  #   image: gateway
-  #   privileged: true
-  #   restart: always
-  #   build:
-  #       context: ./Gateway
-  #       dockerfile: Dockerfile
-  #   ports:
-  #     - "8887:8887"
-  #   depends_on:
-  #     - redis
-  #   networks:
-  #       redes_data:
-  #           ipv4_address: 172.20.0.6
-
+  gateway:
+    container_name: gateway
+    image: gateway
+    privileged: true
+    build:
+        context: ./Gateway
+        dockerfile: Dockerfile
+    ports:
+      - "8887:8887"
+    depends_on:
+      - redis
+    networks:
+        redes_data:
+            ipv4_address: 172.20.0.6
   # book:
   #   container_name: bookstore
   #   image: book
@@ -103,26 +93,28 @@ services:
   #       redes_data:
   #           ipv4_address: 172.20.0.11
 
-  censo_app:
-    container_name: censo_app
-    image: censo
-    restart: always
-    privileged: true
-    build:
-        context: ./censo
-        dockerfile: Dockerfile
-    ports:
-      - "8889:8889"
-    depends_on:
-      - db
-    networks:
-        redes_data:
-            ipv4_address: 172.20.0.11
+
+
+  # censo_app:
+  #   container_name: censo_app
+  #   image: censo
+  #   restart: always
+  #   privileged: true
+  #   build:
+  #       context: ./censo
+  #       dockerfile: Dockerfile
+  #   ports:
+  #     - "8889:8889"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #       redes_data:
+  #           ipv4_address: 172.20.0.11
+
 
   postgres:
     container_name: postgres
     image: postgres
-    restart: always
     volumes:
       - keycloak_data:/var/lib/postgresql/data
     environment:
@@ -136,7 +128,6 @@ services:
   keycloak:
     container_name: keycloak
     image: jboss/keycloak
-    restart: always
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres
@@ -156,53 +147,32 @@ services:
     depends_on:
       - postgres
 
-  # web:
-  #   container_name: web
-  #   image: docker-node-express-mongoapp
-  #   restart: always
-  #   build:
-  #       context: ./node_umg
-  #       dockerfile: Dockerfile
-  #   command: node src/index.js
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./node_umg:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   depends_on:
-  #     - "mongo"
-  #   networks:
-  #     redes_data:
-  #         ipv4_address: 172.20.0.12
-
   # mongo:
-  #   container_name: mongo
+  #   image: mongo
+  #   container_name: mongodb
   #   restart: always
-  #   image: "mongo"
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
   #   ports:
-  #     - "27017:27017"
-  #   volumes: 
-  #     - ./mongo/data:/data/db
+  #     - 27017:27017
   #   networks:
   #       redes_data:
   #           ipv4_address: 172.20.0.9
 
-  # adminmongo-service:
-  #   image: mrvautin/adminmongo
-  #   restart: "always"
-  #   links: ['mongo:mongo']
-  #   environment:
-  #     - CONN_NAME=whatever
-  #     - DB_HOST=mongo
-  #     - DB_PORT=27017
-  #     - HOST=0.0.0.0
+  # mongo-express:
+  #   container_name: mongo-express
+  #   image: mongo-express
+  #   restart: always
   #   ports:
-  #     - 1234:1234
+  #     - 8081:8081
   #   networks:
   #       redes_data:
-  #           ipv4_address: 172.20.0.13
-
-     
+  #           ipv4_address: 172.20.0.10
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      
 networks:
   redes_data:
       external:
