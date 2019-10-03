@@ -6,14 +6,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+// import org.springframework.context.annotation.FilterType;
+// import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;/*  */
 
-// @SpringBootApplication
-// @SpringBootApplication
 @SpringBootApplication/*(exclude = {SecurityAutoConfiguration.class,
 		UserDetailsServiceAutoConfiguration.class})*/
-// @ComponentScan(basePackages = { "com.example.demo" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = GlobalMethodSecurityConfiguration.class))
 @ComponentScan(basePackages = { "com.example.demo" })
 @EnableEurekaClient
 public class DemoApplication {

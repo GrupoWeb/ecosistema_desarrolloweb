@@ -21,7 +21,9 @@ class KeycloakAudienceValidator implements OAuth2TokenValidator<Jwt> {
 
 
         if (!jwt.getAudience().contains("dev-umg")) {
+            
             return OAuth2TokenValidatorResult.failure(error);
+            // return "prr";
         }
 
         return OAuth2TokenValidatorResult.success();

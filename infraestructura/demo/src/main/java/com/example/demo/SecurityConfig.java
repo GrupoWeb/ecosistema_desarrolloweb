@@ -30,6 +30,7 @@ public class SecurityConfig extends GlobalMethodSecurityConfiguration {
         expressionHandler.setApplicationContext(applicationContext);
         expressionHandler.setPermissionEvaluator(permissionEvaluator);
 
+       
         return expressionHandler;
     }
 

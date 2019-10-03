@@ -5,6 +5,7 @@ server:
 spring:
   application:
     name: book-store
+  
 
   datasource:
     url: jdbc:mysql://172.20.0.3:3306/bookstore?useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL
@@ -58,9 +59,9 @@ eureka:
 logging:
   level:
     # root: DEBUG
-    # org.springframework.web: DEBUG
+    org.springframework.web: DEBUG
     org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
-#    org.springframework.cloud.gateway: DEBUG
+    #org.springframework.cloud.gateway: DEBUG
 
 

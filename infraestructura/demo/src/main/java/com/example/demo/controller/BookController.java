@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
+import org.springframework.http.MediaType;
 
 @RestController
 @RequestMapping("/books")
@@ -27,9 +28,10 @@ public class BookController {
     // }
 
     @GetMapping("demo")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<List<Demobook>> getAllDemoBooks(){
         return ResponseEntity.ok((List)repositorio.findAll());
+        
     }
 
     // @GetMapping("/isbn/{isbn}")

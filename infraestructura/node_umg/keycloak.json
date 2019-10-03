@@ -1,0 +1,6 @@
+{
+    "realm": "dev",
+    "auth-server-url": "http://172.20.0.8:8080/auth",
+    "resource": "dev-umg",
+    "public-client": true
+}

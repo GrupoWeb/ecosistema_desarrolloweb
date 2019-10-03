@@ -1,9 +1,48 @@
 const express = require('express');
 const path  = require('path');
 
+
+
+
+
 // Initilizations
 const app = express();
 require('./database')
+
+
+//-------------------- EUREKA CONFIG---------------------------
+var bodyParser = require('body-parser');
+
+const Eureka = require('eureka-js-client').Eureka;
+const eureka = new Eureka({
+    instance: {
+      app: 'webapp',
+      hostName: 'webapp',
+      ipAddr: '127.0.0.1',
+      statusPageUrl: 'http://172.20.0.12:3000',
+      port: {
+        '$': 3000,
+        '@enabled': 'true',
+      },
+      vipAddress: 'localhost',
+      dataCenterInfo: {
+        '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
+        name: 'MyOwn',
+      }
+    },
+    eureka: {
+      host: '172.20.0.5',
+      port: 8761,
+      servicePath: '/eureka/apps/'
+    }
+  });
+  eureka.logger.level('debug');
+  eureka.start(function(error){
+    console.log(error || 'complete');
+  });
+//-------------------------------------------------------
+
+
 
 // Settings
 app.set('port', process.env.PORT || 3000);
@@ -15,6 +54,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Router
 app.use(require('./router/controlador'))
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // Static Files
 

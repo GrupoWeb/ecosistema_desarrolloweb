@@ -35,9 +35,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 /*.mvcMatchers("/claims").hasAuthority("SCOPE_openid")
                 .mvcMatchers("/email").hasAuthority("SCOPE_email")*/
+                
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer().jwt().jwtAuthenticationConverter(keycloakJwtAuthenticationConverter);
+        
     }
 
     @Bean

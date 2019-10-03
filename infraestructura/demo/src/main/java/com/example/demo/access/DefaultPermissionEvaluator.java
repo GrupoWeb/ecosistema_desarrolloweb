@@ -14,6 +14,7 @@ class DefaultPermissionEvaluator implements PermissionEvaluator {
 	@Override
 	public boolean hasPermission(Authentication auth, Object targetDomainObject, Object permission) {
 		log.info("check permission user={} target={} permission={}", auth.getName(), targetDomainObject, permission);
+		
 		return true;
 	}
 
