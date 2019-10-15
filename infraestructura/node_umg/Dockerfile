@@ -1,16 +1,15 @@
 FROM node
 
-# Create app directory
+COPY ["package.json" , "/usr/src/"]
+
 WORKDIR /usr/src/app
 
-# Install app dependencies
-COPY package.json .
-
-RUN npm install
-
-# Bundle app source
-COPY . .
+COPY ["." ,"/usr/src/"]
 
 EXPOSE 3000
 
-CMD ["node", "src/index.js"]
+
+CMD ["npx", "nodemon", "src/index.js"]
+
+
+RUN npm install

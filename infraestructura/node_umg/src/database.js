@@ -17,7 +17,8 @@ const mongoose = require('mongoose');
 // .then(dv => console.log('DB is connect'))
 // .catch(err => console.log(err));
 // const connectDb = () => {
-return mongoose.connect('mongodb://127.0.0.1:27017/votos',{
+return mongoose.connect('mongodb://mongodb:27017/votos',{
+// return mongoose.connect('mongodb://172.20.0.9:27017/votos',{
 // return mongoose.connect('mongodb://172.20.0.10:8081//votos',{
     useCreateIndex: true,
     useNewUrlParser: true,

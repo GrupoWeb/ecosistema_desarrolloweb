@@ -20,11 +20,11 @@ app.use(session({
 
 var keycloak = new Keycloak({ store: memoryStore });
 
-app.use(keycloak.middleware({
-    logout: '/logout',
-    admin: '/',
-    protected: '/protected/resource'
-  }));
+// app.use(keycloak.middleware({
+//     logout: '/logout',
+//     admin: '/',
+//     protected: '/protected/resource'
+//   }));
 
 
   const keycloakHost = '172.20.0.8';
@@ -38,7 +38,7 @@ app.use(keycloak.middleware({
             // configure the request to your keycloak server
             const options = {
                 method: 'GET',
-                url: `https://${keycloakHost}:${keycloakPort}/auth/realms/${realmName}/protocol/openid-connect/userinfo`,
+                url: `http://${keycloakHost}:${keycloakPort}/auth/realms/${realmName}/protocol/openid-connect/userinfo`,
                 headers: {
                 // add the token you received to the userinfo request, sent to keycloak
                 Authorization: req.headers.authorization,
@@ -70,9 +70,7 @@ app.use(keycloak.middleware({
 
   // configure your other routes
   app.use('/some-route', (req, res) => {
-    /*
-    * api route logic
-    */
+    res.send('router');
   });
   
   
@@ -87,7 +85,13 @@ app.use(keycloak.middleware({
 
 
 
-
+  app.get('/login', keycloak.protect(), function (req, res) {
+    res.render('index', {
+      result: JSON.stringify(JSON.parse(req.session['keycloak-token']), null, 4),
+      event: '1. Authentication\n2. Login'
+    });
+  });
+  
 
 router.get('/web/index', keycloak.protect(), (req, res) => {
     res.send('router');
