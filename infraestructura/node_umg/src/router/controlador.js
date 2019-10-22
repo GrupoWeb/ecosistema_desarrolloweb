@@ -20,6 +20,8 @@ app.use(session({
 
 var keycloak = new Keycloak({ store: memoryStore });
 
+app.use( keycloak.middleware());
+
 // app.use(keycloak.middleware({
 //     logout: '/logout',
 //     admin: '/',
@@ -45,6 +47,7 @@ var keycloak = new Keycloak({ store: memoryStore });
                 },
             };
   
+            console.log('uno')
             // send a request to the userinfo endpoint on keycloak
             request(options, (error, response, body) => {
                 if (error) throw new Error(error);

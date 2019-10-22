@@ -185,11 +185,11 @@ services:
     build:
         context: ./node_umg
         dockerfile: Dockerfile
-    command: node src/index.js
+    command: npm run dev
     ports:
       - "3000:3000"
     volumes:
-      - ./node_umg:/usr/src/app
+      - .:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
       - "mongo"
